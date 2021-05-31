@@ -1,4 +1,4 @@
-set(TARGET correct_lightcurve)
+set(TARGET binary_modulation)
 
 add_executable(${TARGET}
   main.cc

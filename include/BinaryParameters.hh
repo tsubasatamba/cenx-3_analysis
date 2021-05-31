@@ -28,4 +28,15 @@ constexpr double projected_semimajor_axis_error = 0.0009*unit::lts;
 
 }
 
+namespace BinaryModulation
+{
+constexpr double obs_start = 5.735675819933984E+04*unit::day;
+
+constexpr double orbital_period = BinaryParameters::P0;
+constexpr double pulse_period = 4.80258;
+constexpr double modulation_amplitude = 0.00661624;
+constexpr double t0 = obs_start-35960.5;
+constexpr double velocity_of_sight = unit::c*modulation_amplitude/pulse_period;
+constexpr double projected_semimajor_axis = orbital_period*velocity_of_sight/unit::twopi;
+}
 #endif

@@ -32,6 +32,7 @@ include_directories(
   include
   $ENV{HOME}/include
   /usr/local/include
+  /usr/local/Cellar/cfitsio/3.490/include
   ${ROOT_INC_DIR}
   )
 
@@ -40,3 +41,4 @@ link_directories(
   )
 
 add_subdirectory(correct_lightcurve)
+add_subdirectory(binary_modulation)
