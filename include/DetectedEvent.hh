@@ -1,5 +1,5 @@
-#ifndef Event_H
-#define Event_H
+#ifndef DetectedEvent_H
+#define DetectedEvent_H 1
 
 #include <iostream>
 #include "BinaryParameters.hh"

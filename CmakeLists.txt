@@ -42,3 +42,4 @@ link_directories(
 
 add_subdirectory(correct_lightcurve)
 add_subdirectory(binary_modulation)
+add_subdirectory(calculate_pulse_fraction)
