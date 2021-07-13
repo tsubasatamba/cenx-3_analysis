@@ -3,26 +3,20 @@
 #include "AstroUnits.hh"
 #include "DetectedEvent.hh"
 #include "LightCurve.hh"
+#include "CleanedEvents.hh"
 
-int main(int argc, char** argv) {
-  DetectedEvent* ev = new DetectedEvent();
-  ev->setArrivalTime(BinaryModulation::obs_start);
-  ev->process();
-  std::cout << ev->OrbitalPhase() << " " << ev->CorrectedTime() << std::endl;
-  /*
-  if (argc!=3) {
-    std::cerr << "USAGE: correct_lightcurve base_file new_file" << std::endl;
-    exit(1);
+int main() {
+  for (char c='A'; c<='B'; c++) {
+    std::string id = "";
+    id += c;
+    const std::string base_filename = "/Users/tamba/work/cenx-3/nustar_archive/barycorr_event/nu30101055002" + id + "01_cl_barycorr.evt";
+    const std::string new_filename = "/Users/tamba/work/cenx-3/nustar_archive/binary_corrected_event/nu30101055002" + id + "01_cl_barycorr_binarycorrected.evt";
+    std::string command = "cp " + base_filename + " " + new_filename;
+    system(command.c_str());
+    CleanedEvents* cleaned_ev = new CleanedEvents();
+    cleaned_ev->process(new_filename);
+    delete(cleaned_ev);
   }
-  std::string base_file = argv[1];
-  std::string new_file = argv[2];
-  std::string command = "cp " + base_file + " " + new_file;
-  system(command.c_str());
-  LightCurve* lightcurve = new LightCurve();
-  const int mode = 2;
-  lightcurve->process(new_file, mode);
 
-  delete(lightcurve);
-  */
   return 0;
 }

@@ -30,7 +30,7 @@ constexpr double projected_semimajor_axis_error = 0.0009*unit::lts;
 
 namespace BinaryModulation
 {
-constexpr double obs_start = 5.735675819933984E+04*unit::day;
+constexpr double obs_start = 186603042.243177*unit::s;
 
 constexpr double orbital_period = BinaryParameters::P0;
 constexpr double pulse_period = 4.80258;

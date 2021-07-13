@@ -4,6 +4,8 @@ add_executable(${TARGET}
   main.cc
   ../src/DetectedEvent.cc
   ../src/LightCurve.cc
+  ../src/AstroUnits.cc
+  ../src/CleanedEvents.cc
   )
 
 target_link_libraries(${TARGET}

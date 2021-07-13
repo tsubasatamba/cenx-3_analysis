@@ -52,6 +52,13 @@ constexpr double G = 6.67430E-8;
 constexpr double c = 2.99792450*m/s;
 constexpr double lts = c*s;
 constexpr double lty = c*year;
+
+//event time
+constexpr double MJDREFI = 55197.0*day;
+constexpr double MJDREFF = 7.660185200000000E-04*s;
+constexpr double MJDREF = MJDREFI+MJDREFF;
+double mjd_to_event_time(double mjd);
+double event_time_to_mjd(double event_time);
 }
 
 #endif
