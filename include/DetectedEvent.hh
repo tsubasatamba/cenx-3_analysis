@@ -9,6 +9,7 @@ class DetectedEvent
 public:
   void calculateOrbitalPhase();
   void calculateCorrectedTime();
+  void process();
   
   void setArrivalTime(double v) { arrivalTime_ = v; }
   double ArrivalTime() {return arrivalTime_; }
