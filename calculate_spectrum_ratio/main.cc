@@ -25,6 +25,7 @@ void write_qdp(std::vector<double>& energy_array, std::vector<double>& ratio, st
     const double y = ratio[i];
     const double dy = ratio_error[i];
     if (y==0.0) continue;
+    if (dy/y>=0.9) continue; 
     fout << x << " " << dx << " " << y << " " << dy << "\n";
   }
   fout.close();
