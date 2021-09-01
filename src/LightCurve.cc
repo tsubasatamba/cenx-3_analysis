@@ -53,6 +53,11 @@ void LightCurve::readFits(const std::string& filename)
   checkFitsStatus(fits_status);
 
   {
+    cfitsio::fits_read_key(fitsfile, TDOUBLE, "TIMEZERO", &timezero_, nullptr, &fits_status);
+    checkFitsStatus(fits_status);
+  }
+
+  {
     long naxes[2] = {0, 0};
     std::string colname = "TIME";
     int colid = 0;
@@ -70,7 +75,7 @@ void LightCurve::readFits(const std::string& filename)
     checkFitsStatus(fits_status);
 
     for (int i=0; i<num_event; i++) {
-      eventsTime_[i] += tstart_;
+      eventsTime_[i] += timezero_;
     }
   }
   
@@ -104,12 +109,13 @@ void LightCurve::correctData()
 {
   correctTime(tstart_);
   correctTime(tstop_);
+  correctTime(timezero_);
   dateObs_ = timeToDate(tstart_);
   dateEnd_ = timeToDate(tstop_);
 
   for (double& t: eventsTime_) {
     correctTime(t);
-    t -= tstart_;
+    t -= timezero_;
   }
   for (double& t: gtiStart_) {
     correctTime(t);
@@ -146,6 +152,11 @@ void LightCurve::writeFits(const std::string& filename)
   cfitsio::fits_movabs_hdu(fitsfile, 2, nullptr, &fits_status);
   checkFitsStatus(fits_status);
 
+  {
+    cfitsio::fits_update_key(fitsfile, TDOUBLE, "TIMEZERO", &timezero_, nullptr, &fits_status);
+    checkFitsStatus(fits_status);
+  }
+  
   {
     long naxes[2] = {0, 0};
     std::string colname = "TIME";

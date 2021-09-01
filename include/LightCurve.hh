@@ -18,6 +18,7 @@ public:
 private:
   double tstart_ = 0.0;
   double tstop_ = 0.0;
+  double timezero_ = 0.0;
   std::string dateObs_ = "";
   std::string dateEnd_ = "";
   std::vector<double> eventsTime_;
