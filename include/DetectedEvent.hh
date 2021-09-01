@@ -7,21 +7,21 @@
 class DetectedEvent
 {
 public:
-  void calculateOrbitalPhase();
-  void calculateCorrectedTime();
-  void process();
+  double calculateOrbitalPhase(double t);
+  void calculateBinaryTime();
+  void calculateArrivalTime();
   
   void setArrivalTime(double v) { arrivalTime_ = v; }
   double ArrivalTime() {return arrivalTime_; }
   void setOrbitalPhase(double v) { orbitalPhase_ = v; }
   double OrbitalPhase() { return orbitalPhase_; }
-  void setCorrectedTime(double v) { correctedTime_ = v; }
-  double CorrectedTime() { return correctedTime_; }
+  void setBinaryTime(double v) { binaryTime_ = v; }
+  double BinaryTime() { return binaryTime_; }
   
 private:
   double arrivalTime_ = 0.0;
   double orbitalPhase_ = 0.0;
-  double correctedTime_ = 0.0;
+  double binaryTime_ = 0.0;
 };
 
 #endif

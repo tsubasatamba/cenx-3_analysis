@@ -1,28 +1,30 @@
 #include <cmath>
 #include "DetectedEvent.hh"
 
-void DetectedEvent::calculateOrbitalPhase()
+double DetectedEvent::calculateOrbitalPhase(double t)
 {
   const double p0 = BinaryModulation::orbital_period;
   const double t0 = BinaryModulation::t0;
-  const double t = ArrivalTime();
   const double dt = t-t0;
 
   const double phi = (dt/p0-std::floor(dt/p0))*unit::twopi;
-  setOrbitalPhase(phi);
+  return phi;
 }
 
-void DetectedEvent::calculateCorrectedTime()
+void DetectedEvent::calculateBinaryTime()
 {
   const double axsini = BinaryModulation::projected_semimajor_axis;
   const double t = ArrivalTime();
-  const double phi = OrbitalPhase();
+  const double phi = calculateOrbitalPhase(t);
   const double tcorr = t-(axsini*std::cos(phi))/unit::c;
-  setCorrectedTime(tcorr);
+  setBinaryTime(tcorr);
 }
 
-void DetectedEvent::process()
+void DetectedEvent::calculateArrivalTime()
 {
-  calculateOrbitalPhase();
-  calculateCorrectedTime();
+  const double axsini = BinaryModulation::projected_semimajor_axis;
+  const double t = BinaryTime();
+  const double phi = calculateOrbitalPhase(t);
+  const double tcorr = t+(axsini*std::cos(phi))/unit::c;
+  setArrivalTime(tcorr);
 }

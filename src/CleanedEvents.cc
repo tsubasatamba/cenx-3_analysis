@@ -195,8 +195,8 @@ void CleanedEvents::correctTime(double& t)
 {
   DetectedEvent ev;
   ev.setArrivalTime(t);
-  ev.process();
-  t = ev.CorrectedTime();
+  ev.calculateBinaryTime();
+  t = ev.BinaryTime();
 }
 
 std::string CleanedEvents::timeToDate(double t)

@@ -71,9 +71,8 @@ void LightCurve::correctTimeWithBinaryParameter()
   for (int i=0; i<num_event; i++) {
     DetectedEvent ev;
     ev.setArrivalTime(arrivalTime_[i]);
-    ev.calculateOrbitalPhase();
-    ev.calculateCorrectedTime();
-    correctedTime_[i] = ev.CorrectedTime();
+    ev.calculateBinaryTime();
+    correctedTime_[i] = ev.BinaryTime();
   }
   tstartCorrected_ = tstart_ + (correctedTime_[0]-arrivalTime_[0]);
   tstopCorrected_ = tstop_ + (correctedTime_.back()-arrivalTime_.back());
