@@ -148,6 +148,47 @@ void Spectrum::calculateRatio(Spectrum* spectrum, std::vector<int>& channels_arr
   }
 }
 
+void Spectrum::applyEffectiveArea(const std::string& filename)
+{
+  cfitsio::fitsfile* fitsfile = nullptr;
+  int fits_status = 0;
+  std::string colname = "SPECRESP";
+  long naxes[2] = {0, 0};
+  int nfound = 0;
+
+  cfitsio::fits_open_file(&fitsfile, filename.c_str(), READONLY, &fits_status);
+  checkFitsStatus(fits_status);
+
+  cfitsio::fits_movabs_hdu(fitsfile, 2, nullptr, &fits_status);
+  checkFitsStatus(fits_status);
+
+  cfitsio::fits_read_keys_lng(fitsfile, (char*)"NAXIS", 1, 2, naxes, &nfound, &fits_status);
+  checkFitsStatus(fits_status);
+
+  const int num_event = static_cast<int>(naxes[1]);
+  int colid = 0;
+  effectiveArea_.resize(num_event);
+  
+  cfitsio::fits_get_colnum(fitsfile, CASEINSEN, const_cast<char*>(colname.c_str()), &colid, &fits_status);
+  checkFitsStatus(fits_status);
+    
+  cfitsio::fits_read_col(fitsfile, TDOUBLE, colid, (long)1, (long)1, naxes[1], nullptr, &effectiveArea_[0], nullptr, &fits_status);
+  checkFitsStatus(fits_status);
+
+  if (num_event!=static_cast<int>(countsPerSecond_.size())) {
+    std::cerr << "ERROR in reading arf file." << std::endl;
+    exit(1);
+  }
+
+  for (int i=0; i<num_event; i++) {
+    const double now = effectiveArea_[i];
+    countsPerSecond_[i] /= now;
+  }
+
+  cfitsio::fits_close_file(fitsfile, &fits_status);
+  checkFitsStatus(fits_status);
+}
+
 namespace
 {
 void checkFitsStatus(int fits_status)

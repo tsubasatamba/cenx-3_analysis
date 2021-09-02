@@ -12,7 +12,7 @@ public:
   void readFits(const std::string& filename);
   void addSpectrum(Spectrum* spectrum);
   void calculateRatio(Spectrum* spectrum, std::vector<int>& channels_array, std::vector<double>& ratio, std::vector<double>& ratio_error);
-//  void writeData(const std::string& filename);
+  void applyEffectiveArea(const std::string& filename);
 
   std::vector<int>& Channel() { return channel_; }
   std::vector<double>& Counts() { return counts_; }
@@ -26,6 +26,7 @@ private:
   std::vector<int> grouping_;
   std::vector<double> countsPerSecond_;
   double exposure_ = 0.0;
+  std::vector<double> effectiveArea_;
 };
 
 #endif

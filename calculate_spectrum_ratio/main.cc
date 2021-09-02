@@ -44,15 +44,27 @@ int main(int argc, char** argv) {
   const std::string input_filename2 = directory1 + "/FPMB_sr_grp.pha";
   const std::string input_filename3 = directory2 + "/FPMA_sr_grp.pha";
   const std::string input_filename4 = directory2 + "/FPMB_sr_grp.pha";
+
+  const std::string arf_filename1 = directory1 + "/FPMA_sr.arf";
+  const std::string arf_filename2 = directory1 + "/FPMB_sr.arf";
+  const std::string arf_filename3 = directory2 + "/FPMA_sr.arf";
+  const std::string arf_filename4 = directory2 + "/FPMB_sr.arf";
   
   Spectrum* spectrum1 = new Spectrum();
   spectrum1->readFits(input_filename1);
+  spectrum1->applyEffectiveArea(arf_filename1);
+
   Spectrum* spectrum2 = new Spectrum();
   spectrum2->readFits(input_filename2);
+  spectrum2->applyEffectiveArea(arf_filename2);
+  
   Spectrum* spectrum3 = new Spectrum();
   spectrum3->readFits(input_filename3);
+  spectrum3->applyEffectiveArea(arf_filename3);
+
   Spectrum* spectrum4 = new Spectrum();
   spectrum4->readFits(input_filename4);
+  spectrum4->applyEffectiveArea(arf_filename4);
   
   spectrum1->addSpectrum(spectrum2);
   spectrum3->addSpectrum(spectrum4);
