@@ -119,12 +119,14 @@ void PulseProfile::calculatePulseFractionRms()
     eb[i] = std::sqrt(eb[i]);
     
     const double now = a[i]*a[i]+b[i]*b[i]-s2a[i]-s2b[i];
-    power_[i] = now;
+    if (i==0) power_[i] = now;
+    else power_[i] = now*2.0;
     if (i>=1) {
       sum += now;
     }
     double enow = std::sqrt(4.0*a[i]*a[i]*ea[i]*ea[i]+4.0*b[i]*b[i]*eb[i]*eb[i]);
-    powerError_[i] = enow;
+    if (i==0) powerError_[i] = enow;
+    else powerError_[i] = enow*2.0;
     if (i>=1) {
       esum += enow*enow;
     }

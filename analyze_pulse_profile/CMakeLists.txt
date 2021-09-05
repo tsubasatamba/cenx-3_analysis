@@ -1,4 +1,4 @@
-set(TARGET calculate_pulse_fraction)
+set(TARGET analyze_pulse_profile)
 
 add_executable(${TARGET}
   main.cc

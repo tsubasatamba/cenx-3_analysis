@@ -42,7 +42,7 @@ link_directories(
 
 add_subdirectory(correct_lightcurve)
 add_subdirectory(binary_modulation)
-add_subdirectory(calculate_pulse_fraction)
+add_subdirectory(analyze_pulse_profile)
 add_subdirectory(correct_cleaned_event)
 add_subdirectory(calculate_spectrum_ratio)
 add_subdirectory(extract_lightcurve_from_spectrum)
