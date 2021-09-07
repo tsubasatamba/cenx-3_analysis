@@ -15,8 +15,7 @@ int main(int argc, char** argv) {
   const std::string output_json_file = argv[2];
 
   PulseProfile* a = new PulseProfile();
-//  a->readQDP(qdp_file, 0, 8, 9, 3);
-  a->readQDP(qdp_file, 0, 1, 2, 0);
+  a->readQDP(qdp_file, 0, 8, 9, 3);
   a->calculatePulseFractionAll();
     
   std::pair<double, double>& pulse_fraction_area = a->PulseFractionArea();
