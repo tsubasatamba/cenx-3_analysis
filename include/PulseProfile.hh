@@ -26,6 +26,7 @@ public:
   std::pair<double, double>& PulseFractionRms() { return pulseFractionRms_; }
   std::vector<double>& Power() { return power_; }
   std::vector<double>& PowerError() { return powerError_; }
+  std::vector<double>& PhaseShift() { return phaseShift_; }
   
 private:
   std::vector<double> phase_;
@@ -36,6 +37,7 @@ private:
   std::pair<double, double> pulseFractionRms_ = std::pair<double, double>(0.0, 0.0);
   std::vector<double> power_;
   std::vector<double> powerError_;
+  std::vector<double> phaseShift_;
 };
 
 #endif

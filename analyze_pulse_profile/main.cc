@@ -15,7 +15,8 @@ int main(int argc, char** argv) {
   const std::string output_json_file = argv[2];
 
   PulseProfile* a = new PulseProfile();
-  a->readQDP(qdp_file, 0, 8, 9, 3);
+//  a->readQDP(qdp_file, 0, 8, 9, 3);
+  a->readQDP(qdp_file, 0, 1, 2, 0);
   a->calculatePulseFractionAll();
     
   std::pair<double, double>& pulse_fraction_area = a->PulseFractionArea();
@@ -23,6 +24,7 @@ int main(int argc, char** argv) {
   std::pair<double, double>& pulse_fraction_rms = a->PulseFractionRms();
   std::vector<double>& power = a->Power();
   std::vector<double>& power_error = a->PowerError();
+  std::vector<double>& phase_shift = a->PhaseShift();
   const int power_size = power.size();  
 
   json js;
@@ -36,10 +38,13 @@ int main(int argc, char** argv) {
   for (int i=0; i<power_size; i++) {
     const double value = power[i];
     const double error = power_error[i];
+    const double twopi = 2.0*M_PI;
+    const double peak_phase = phase_shift[i]>0.0 ? phase_shift[i]/(twopi) : (phase_shift[i]+twopi)/twopi;
     json js_now;
     js_now.push_back(json::object_t::value_type("index", i));
     js_now.push_back(json::object_t::value_type("value", value));
     js_now.push_back(json::object_t::value_type("error", error));
+    js_now.push_back(json::object_t::value_type("peak_phase", peak_phase));
     js_power.push_back(js_now);
   }
 

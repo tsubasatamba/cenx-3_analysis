@@ -92,6 +92,7 @@ void PulseProfile::calculatePulseFractionRms()
   const int n = data_.size();
   power_.resize(n);
   powerError_.resize(n);
+  phaseShift_.resize(n);
   const double n2 = static_cast<double>(n)*static_cast<double>(n);
   std::vector<double> a(n);
   std::vector<double> b(n);
@@ -130,6 +131,7 @@ void PulseProfile::calculatePulseFractionRms()
     if (i>=1) {
       esum += enow*enow;
     }
+    phaseShift_[i] = std::atan2(b[i], a[i]);
   }
   esum = std::sqrt(esum);
   const double res = std::sqrt(2.0*sum)/a[0];
